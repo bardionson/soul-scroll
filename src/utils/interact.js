@@ -70,12 +70,19 @@ export const orderPrayer = async (numPrayerReadings) => {
         params: [txHash],
       })
     }
+    // get the image from get NFTmetadata
+    //let metadata = null
+    //metadata = await web3.alchemy.getNftMetadata({
+    //  contractAddress: receipt.logs[0].address,
+    //  tokenId: receipt.logs[0].topics[3]
+    //})
 
    return {
      success: true,
      status:
       "✅ Check out your transaction on Etherscan: https://rinkeby.etherscan.io/tx/" +
       txHash + " https://testnets.opensea.io/assets/rinkeby/" + receipt.logs[0].address +"/"+ web3.utils.hexToNumber(receipt.logs[0].topics[3])
+      //metadata.media[0].raw
     }
   } catch (error) {
    return {
@@ -110,7 +117,7 @@ export const sonCreatePrayer = async (prayerType, prayer, prayer2, prayer3) => {
   } catch (error) {
    return {
     success: false,
-    status: "😥 Something went wrong: " + error.message,
+    statusInit: "😥 Something went wrong: " + error.message,
    }
  }
 }
@@ -142,7 +149,7 @@ export const payInitiation = async () => {
   } catch (error) {
    return {
     success: false,
-    status: "😥 Something went wrong: " + error.message,
+    statusAdd: "😥 Something went wrong: " + error.message,
    }
  }
 }

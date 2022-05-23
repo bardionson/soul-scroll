@@ -6,6 +6,8 @@ const Minter = (props) => {
   //State variables
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
+  const [statusInit, setStatusInit] = useState("");
+  const [statusAdd, setStatusAdd] = useState("");
   const [numPrayerReadings, setNumPrayerReadings] = useState("");
   const [prayerType, setPrayerType] = useState("");
   const [prayer, setPrayer] = useState("");
@@ -57,12 +59,12 @@ function addWalletListener() {
 
   const onCreatePrayer = async () => {
      const { status } = await sonCreatePrayer(prayerType, prayer, prayer2, prayer3)
-     setStatus(status)
+     setStatusAdd(status)
   };
 
   const onInitPressed = async () => {
      const { status } = await payInitiation()
-     setStatus(status)
+     setStatusInit(status)
   };
 
   return (
@@ -95,12 +97,16 @@ function addWalletListener() {
       <button id="mintButton" onClick={onMintPressed}>
         Pray for Me
       </button>
+      <p id="status">
+        {status}
+      </p>
+<center>*************************************************</center>
       <p>Only pay initiation dues if you have been elected as a Commander. Please contact @soulscroll1 on Twitter</p>
       <button id="initButton" onClick={onInitPressed}>
         Pay Initiation Dues
       </button>
       <p id="status">
-        {status}
+        {statusInit}
       </p>
 <center>*************************************************</center>
       <h1>Write a prayer</h1>
@@ -131,6 +137,9 @@ function addWalletListener() {
           onChange={(event) => setPrayer3(event.target.value)}
         />
       </form>
+      <p id="status">
+        {statusAdd}
+      </p>
       <button id="prayButton" onClick={onCreatePrayer}>
         Save Prayer
       </button>
