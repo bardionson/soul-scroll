@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import NumericInput from 'react-numeric-input';
-import { connectWallet, getCurrentWalletConnected, orderPrayer, payInitiation } from "./utils/interact.js";
+import { connectWallet, getCurrentWalletConnected, orderPrayer, payInitiation, sonCreatePrayer } from "./utils/interact.js";
 const Minter = (props) => {
 
   //State variables
   const [walletAddress, setWallet] = useState("");
   const [status, setStatus] = useState("");
   const [numPrayerReadings, setNumPrayerReadings] = useState("");
+  const [prayerType, setPrayerType] = useState("");
+  const [prayer, setPrayer] = useState("");
+  const [prayer2, setPrayer2] = useState("");
+  const [prayer3, setPrayer3] = useState("");
  
   useEffect(async () => { 
     const { address, status } = await getCurrentWalletConnected()
@@ -51,7 +55,12 @@ function addWalletListener() {
      setStatus(status)
   };
 
-const onInitPressed = async () => {
+  const onCreatePrayer = async () => {
+     const { status } = await sonCreatePrayer(prayerType, prayer, prayer2, prayer3)
+     setStatus(status)
+  };
+
+  const onInitPressed = async () => {
      const { status } = await payInitiation()
      setStatus(status)
   };
@@ -71,6 +80,7 @@ const onInitPressed = async () => {
 
       <br></br>
       <h1 id="title">Soul Scroll (aka Holy Roller)</h1>
+      <h3>Soul Scroll, you might have called it a Holy Roller, is designed to act as a proxy for women to pray approved prayers of the Republic of Gilead out loud</h3>
       <p>
         Pick the number of times to have the generated prayer read, cost is 0.001 Eth per reading but only one NFT per request, then press "Pray for Me."
       </p>
@@ -92,6 +102,38 @@ const onInitPressed = async () => {
       <p id="status">
         {status}
       </p>
+<center>*************************************************</center>
+      <h1>Write a prayer</h1>
+      <p>If you are a Dues Paying Son of Jacob in Giliad create a prayer. You will recieve 75% of the sales. Prayer is sold once as an NFT and the suplicant will pick how many times it is read. The remaining 25% is to support Giliad and maintain the Soul Scroll machines.</p>
+      <form>
+       <h2>Prayer Type - Health, Wealth, Birth, Death, Sin</h2>
+        <input
+          type="text"
+          placeholder="Enter type of prayer 14 characters (Health, Wealth, Ofred...)"
+          onChange={(event) => setPrayerType(event.target.value)}
+        />
+       <h2>Prayer Line One</h2>
+        <input
+          type="text"
+          placeholder="First Line of Prayer 58 character limit"
+          onChange={(event) => setPrayer(event.target.value)}
+        />
+       <h2>Prayer Line Two</h2>
+        <input
+          type="text"
+          placeholder="Second Line of Prayer 58 character limit"
+          onChange={(event) => setPrayer2(event.target.value)}
+        />
+       <h2>Prayer Line Three</h2>
+        <input
+          type="text"
+          placeholder="Third Line of Prayer 58 character limit"
+          onChange={(event) => setPrayer3(event.target.value)}
+        />
+      </form>
+      <button id="prayButton" onClick={onCreatePrayer}>
+        Save Prayer
+      </button>
     </div>
   );
 };

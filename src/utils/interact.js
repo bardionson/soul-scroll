@@ -85,6 +85,36 @@ export const orderPrayer = async (numPrayerReadings) => {
  }
 }
 
+export const sonCreatePrayer = async (prayerType, prayer, prayer2, prayer3) => {
+   window.contract = await new web3.eth.Contract(contractABI, contractAddress)
+   const transactionParameters = {
+     to: contractAddress, // Required except during contract publications.
+     from: window.ethereum.selectedAddress, // must match user's active address.
+     data: window.contract.methods
+       .sonCreatePrayer(prayerType, prayer, prayer2, prayer3)
+       .encodeABI(), //make call to NFT smart contract
+   }
+
+   //sign the transaction via MetaMask
+   try {
+     const txHash = await window.ethereum.request({
+     method: "eth_sendTransaction",
+     params: [transactionParameters],
+   })
+   return {
+     success: true,
+     status:
+      "✅ New prayer is ready to be purchased: https://ropsten.etherscan.io/tx/" +
+      txHash,
+    }
+  } catch (error) {
+   return {
+    success: false,
+    status: "😥 Something went wrong: " + error.message,
+   }
+ }
+}
+
 export const payInitiation = async () => {
    window.contract = await new web3.eth.Contract(contractABI, contractAddress)
    //set up your Ethereum transaction 38D7EA4C68000
