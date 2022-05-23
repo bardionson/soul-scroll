@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { connectWallet, getCurrentWalletConnected, orderPrayer } from "./utils/interact.js";
+import NumericInput from 'react-numeric-input';
+import { connectWallet, getCurrentWalletConnected, orderPrayer, payInitiation } from "./utils/interact.js";
 const Minter = (props) => {
 
   //State variables
@@ -50,6 +51,11 @@ function addWalletListener() {
      setStatus(status)
   };
 
+const onInitPressed = async () => {
+     const { status } = await payInitiation()
+     setStatus(status)
+  };
+
   return (
     <div className="Minter">
       <button id="walletButton" onClick={connectWalletPressed}>
@@ -70,14 +76,18 @@ function addWalletListener() {
       </p>
       <form>
         <h2>✍️ Number of times prayer is read by Soul Scroll machines: </h2>
-        <input
-          type="text"
-          placeholder="10"
-          onChange={(event) => setNumPrayerReadings(event.target.value)}
+        <NumericInput
+          min={0} max={77}
+          onChange={(valueAsNumber) => setNumPrayerReadings(valueAsNumber)}
         />
       </form>
+	<p>{(numPrayerReadings==0?.001:numPrayerReadings*.001).toFixed(3)}</p>
       <button id="mintButton" onClick={onMintPressed}>
         Pray for Me
+      </button>
+      <p>Only pay initiation dues if you have been elected as a Commander. Please contact @soulscroll1 on Twitter</p>
+      <button id="initButton" onClick={onInitPressed}>
+        Pay Initiation Dues
       </button>
       <p id="status">
         {status}
