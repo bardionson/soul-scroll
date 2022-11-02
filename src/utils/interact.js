@@ -6,8 +6,8 @@ const web3 = createAlchemyWeb3(alchemyKey)
 const contractABI = require("../SoulScroll.json")
 //const contractAddress = "0xb3bDAa89E575418c670A70a7ebEF7838Afb5AC77"
 //const contractAddress = "0x468B10B1B1Fb91836eF38188CBECbcB025dA4850"
-const contractAddress = "0x1c951e53c7172b9d7b4e7cAf466BD4057c80F9c2"
-
+//const contractAddress = "0x1c951e53c7172b9d7b4e7cAf466BD4057c80F9c2"
+const contractAddress = "0x7A01b80720ab95bC04F7e613AAEb42d3CFE76A83"
 
 export const connectWallet = async () => {
   if (window.ethereum) {
@@ -71,18 +71,20 @@ export const orderPrayer = async (numPrayerReadings) => {
       })
     }
     // get the image from get NFTmetadata
-    //let metadata = null
-    //metadata = await web3.alchemy.getNftMetadata({
-    //  contractAddress: receipt.logs[0].address,
-    //  tokenId: receipt.logs[0].topics[3]
-    //})
-
+   // const contractAdd = receipt.logs[0].addresss;
+   // const tokenId = receipt.logs[0].topics[3];
+   // const metadata = async(contractAdd, tokenId) => {
+       // const response = await web3.alchemy.getNftMetadata({
+           // contractAddress: contractAddress,
+           // tokenId: tokenId
+       // })
+  // }
    return {
      success: true,
      status:
       "✅ Check out your transaction on Etherscan: https://rinkeby.etherscan.io/tx/" +
-      txHash + " https://testnets.opensea.io/assets/rinkeby/" + receipt.logs[0].address +"/"+ web3.utils.hexToNumber(receipt.logs[0].topics[3])
-      //metadata.media[0].raw
+      txHash + " https://testnets.opensea.io/assets/rinkeby/" + receipt.logs[0].address +"/"+ web3.utils.hexToNumber(receipt.logs[0].topics[3]),
+      //url: metadata.media[0].raw,
     }
   } catch (error) {
    return {

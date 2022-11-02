@@ -125,13 +125,7 @@
 			}
 		],
 		"name": "orderPrayer",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
+		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
 	},
@@ -259,6 +253,19 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint8",
+				"name": "_newMaxOrder",
+				"type": "uint8"
+			}
+		],
+		"name": "setMaxOrder",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "_newPrice",
 				"type": "uint256"
@@ -272,37 +279,29 @@
 	{
 		"inputs": [
 			{
-				"internalType": "bool",
-				"name": "_paused",
-				"type": "bool"
-			}
-		],
-		"name": "setPaused",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "string",
-				"name": "prayerType",
+				"name": "_prayerType",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
-				"name": "prayer",
+				"name": "_prayer",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
-				"name": "prayer2",
+				"name": "_prayer2",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
-				"name": "prayer3",
+				"name": "_prayer3",
 				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_author",
+				"type": "address"
 			}
 		],
 		"name": "sonCreatePrayer",
@@ -385,6 +384,33 @@
 		"type": "function"
 	},
 	{
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "allowedAddresses",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -413,6 +439,11 @@
 			{
 				"internalType": "string",
 				"name": "pType",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "author",
 				"type": "string"
 			},
 			{
@@ -459,17 +490,17 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "initAddressList",
-		"outputs": [
-			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"name": "initiatedAddresses",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -507,6 +538,19 @@
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "maxOrder",
+		"outputs": [
+			{
+				"internalType": "uint8",
+				"name": "",
+				"type": "uint8"
 			}
 		],
 		"stateMutability": "view",
@@ -565,19 +609,6 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "paused",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -678,19 +709,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "sizeInitList",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "bytes4",
@@ -707,25 +725,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "svg",
-				"type": "string"
-			}
-		],
-		"name": "svgToImageURI",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "pure",
 		"type": "function"
 	},
 	{
