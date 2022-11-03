@@ -9,7 +9,7 @@ const Minter = (props) => {
   const [statusInit, setStatusInit] = useState("");
   const [statusAdd, setStatusAdd] = useState("");
   const [url, setUrl] = useState("");
-  const [numPrayerReadings, setNumPrayerReadings] = useState("");
+  const [numPrayerReadings, setNumPrayerReadings] = useState("5");
   const [prayerType, setPrayerType] = useState("");
   const [prayer, setPrayer] = useState("");
   const [prayer2, setPrayer2] = useState("");
@@ -88,6 +88,23 @@ function addWalletListener() {
 
       <br></br>
       <h1 id="title">Soul Scroll (aka Holy Roller)</h1>
+  <div class="row">
+  <div class="column">
+    <div class="image">
+      <img width="300" src="https://i0.wp.com/bardionson.com/wp-content/uploads/2022/11/soulScrollPoster4.png?w=576&ssl=1" alt="machinerack1"></img>
+    </div>
+  </div>
+  <div class="column">
+    <div class="image">
+      <img width="300" src="https://i0.wp.com/bardionson.com/wp-content/uploads/2022/10/soulScrollPoster1.png?w=512&ssl=1" alt="ancientshelf"></img>
+    </div>
+  </div>
+  <div class="column">
+    <div class="image">
+      <img width="300" src="https://i0.wp.com/bardionson.com/wp-content/uploads/2022/11/soulScrollPoster5.png?w=576&ssl=1" alt="modernrack"></img>
+    </div>
+  </div>
+</div>
       <h3>Soul Scroll, you might have called it a Holy Roller, is designed to act as a proxy for women to pray approved prayers of the Republic of Gilead out loud</h3>
       <p>
         Pick the number of times to have the generated prayer read, cost is 0.001 Eth per reading but only one NFT per request, then press "Pray for Me."

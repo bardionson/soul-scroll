@@ -82,8 +82,8 @@ export const orderPrayer = async (numPrayerReadings) => {
    return {
      success: true,
      status:
-      "✅ Check out your transaction on Etherscan: https://rinkeby.etherscan.io/tx/" +
-      txHash + " https://testnets.opensea.io/assets/rinkeby/" + receipt.logs[0].address +"/"+ web3.utils.hexToNumber(receipt.logs[0].topics[3]),
+      "✅ Check out your transaction on Etherscan: https://goerli.etherscan.io/tx/" +
+      txHash + " https://testnets.opensea.io/assets/goerli/" + receipt.logs[0].address +"/"+ web3.utils.hexToNumber(receipt.logs[0].topics[3]),
       //url: metadata.media[0].raw,
     }
   } catch (error) {
@@ -113,7 +113,7 @@ export const sonCreatePrayer = async (prayerType, prayer, prayer2, prayer3) => {
    return {
      success: true,
      status:
-      "✅ New prayer is ready to be purchased: https://ropsten.etherscan.io/tx/" +
+      "✅ New prayer is ready to be purchased: https://goerli.etherscan.io/tx/" +
       txHash,
     }
   } catch (error) {
