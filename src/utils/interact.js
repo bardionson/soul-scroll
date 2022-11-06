@@ -7,7 +7,8 @@ const contractABI = require("../SoulScroll.json")
 //const contractAddress = "0xb3bDAa89E575418c670A70a7ebEF7838Afb5AC77"
 //const contractAddress = "0x468B10B1B1Fb91836eF38188CBECbcB025dA4850"
 //const contractAddress = "0x1c951e53c7172b9d7b4e7cAf466BD4057c80F9c2"
-const contractAddress = "0x7A01b80720ab95bC04F7e613AAEb42d3CFE76A83"
+//const contractAddress = "0x7A01b80720ab95bC04F7e613AAEb42d3CFE76A83"
+const contractAddress = "0xd44e37d09243a008eE1ae7838459D7FaaD9D250C""
 
 export const connectWallet = async () => {
   if (window.ethereum) {

@@ -210,7 +210,7 @@
 			},
 			{
 				"internalType": "bytes",
-				"name": "_data",
+				"name": "data",
 				"type": "bytes"
 			}
 		],
@@ -296,6 +296,11 @@
 			{
 				"internalType": "string",
 				"name": "_prayer3",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_author_name",
 				"type": "string"
 			},
 			{
@@ -642,6 +647,11 @@
 			{
 				"internalType": "string",
 				"name": "text3",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "author_name",
 				"type": "string"
 			},
 			{
