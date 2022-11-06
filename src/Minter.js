@@ -115,7 +115,7 @@ function addWalletListener() {
       <form>
         <p>✍️ Number of times prayer is read by Soul Scroll machines (min 5 | max 10): </p>
         <NumericInput
-          min={5} max={10} value={5}
+          min={5} max={10}
           onChange={(valueAsNumber) => setNumPrayerReadings(valueAsNumber)}
           onLoad={(valueAsNumber) => setNumPrayerReadings(valueAsNumber)}
         />
