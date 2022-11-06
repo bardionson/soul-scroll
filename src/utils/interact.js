@@ -83,8 +83,8 @@ export const orderPrayer = async (numPrayerReadings) => {
    return {
      success: true,
      status:
-      "✅ Check out your transaction on Etherscan: https://goerli.etherscan.io/tx/" +
-      txHash + " https://testnets.opensea.io/assets/goerli/" + receipt.logs[0].address +"/"+ web3.utils.hexToNumber(receipt.logs[0].topics[3]),
+      "✅ Check out your transaction on Etherscan: https://etherscan.io/tx/" +
+      txHash + " https://opensea.io/assets/ethereum/" + receipt.logs[0].address +"/"+ web3.utils.hexToNumber(receipt.logs[0].topics[3]),
       //url: metadata.media[0].raw,
     }
   } catch (error) {
