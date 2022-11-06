@@ -8,7 +8,7 @@ const contractABI = require("../SoulScroll.json")
 //const contractAddress = "0x468B10B1B1Fb91836eF38188CBECbcB025dA4850"
 //const contractAddress = "0x1c951e53c7172b9d7b4e7cAf466BD4057c80F9c2"
 //const contractAddress = "0x7A01b80720ab95bC04F7e613AAEb42d3CFE76A83"
-const contractAddress = "0xd44e37d09243a008eE1ae7838459D7FaaD9D250C""
+const contractAddress = "0xd44e37d09243a008eE1ae7838459D7FaaD9D250C"
 
 export const connectWallet = async () => {
   if (window.ethereum) {
@@ -52,7 +52,7 @@ export const orderPrayer = async (numPrayerReadings) => {
    const transactionParameters = {
      to: contractAddress, // Required except during contract publications.
      from: window.ethereum.selectedAddress, // must match user's active address.
-     value: (1000000000000000*payment).toString(16),
+     value: (10000000000000000*payment).toString(16),
      data: window.contract.methods
        .orderPrayer(window.ethereum.selectedAddress, numPrayerReadings)
        .encodeABI(), //make call to NFT smart contract
@@ -131,7 +131,7 @@ export const payInitiation = async () => {
    const transactionParameters = {
      to: contractAddress, // Required except during contract publications.
      from: window.ethereum.selectedAddress, // must match user's active address.
-     value: (10000000000000000).toString(16),
+     value: (100000000000000000).toString(16),
      data: window.contract.methods
        .payInitiation(window.ethereum.selectedAddress)
        .encodeABI(), //make call to NFT smart contract
