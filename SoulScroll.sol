@@ -3,17 +3,23 @@
 pragma solidity ^0.8.17;
 
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.5.0/contracts/token/ERC721/ERC721.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.5.0/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.5.0/contracts/token/ERC721/extensions/ERC721Burnable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.5.0/contracts/access/Ownable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.5.0/contracts/token/ERC721/extensions/ERC721Royalty.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.5.0/contracts/utils/Counters.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.5.0/contracts/utils/Base64.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.3/contracts/token/ERC721/ERC721.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.3/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.3/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.3/contracts/access/Ownable.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.3/contracts/token/ERC721/extensions/ERC721Royalty.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.3/contracts/utils/Counters.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.3/contracts/utils/Base64.sol";
 
 
 // @author: Bård Ionson
 // @website: bardIonson.com
+// @SoulScroll1
+// Soul Scroll will send your supplications directly to God. Funds collected for the prayers are invested to maintain the work of the Council of Jacob. 
+// Store up your wealth in heaven were it cannot be corrupted. Praise be. 
+// The machine will select from various types of prayers for the good of the community of Christ. You may request special prayers be added to the 
+// machines memory by contacting a Son of Jacob who will add it to the machine. At some point in the future when someone orders a new prayer your
+// prayer request will fly to the heavens. Be generous with the number of times a prayer is read because it may be the prayer of your family or friend.
 
 contract Prayer is ERC721, ERC721URIStorage, ERC721Burnable, ERC721Royalty, Ownable {
     using Counters for Counters.Counter;
@@ -25,32 +31,27 @@ contract Prayer is ERC721, ERC721URIStorage, ERC721Burnable, ERC721Royalty, Owna
     mapping(address => bool) public allowedAddresses;
     mapping(address => bool) public initiatedAddresses;
 
-    //PrayerType {Health, Wealth, Birth, Death, Sin, Ofred}
-
     struct ThePrayer {
         string prayerType;
         string text;
         string text2;
         string text3;
+        string author_name;
         address payable sonOfJacob;
     }
     mapping(uint256 => ThePrayer) public prayers;
 
     Counters.Counter private _tokenIdCounter;
-    constructor() ERC721("Soul Scroll 3", "SOUL3")  {
+    constructor() ERC721("Soul Scroll", "SOUL")  {
         _setDefaultRoyalty(msg.sender ,1000);
-        mintPrice = 1000000000000000; //0.001 eth $2 - opti
-        initPrice = 10000000000000000; //0.01 eth $20 - opti
-        //final mint price 10000000000000000 - 0.01 
-        // final init price 100000000000000000. 0.1
-        //init eth: 1000000000000000000 1 eth $2000 
-        //mint eth: 10000000000000000 .01 eth $20
-        maxOrder = 10;
+        mintPrice = 10000000000000000;
+        initPrice = 100000000000000000; 
+        maxOrder = 20;
         addSonOfJacob(msg.sender);
         initiatedAddresses[msg.sender] = true;
-        createPrayer("Health", "Lord master, I ask that you fulfil your promise to me by", "restoring me to health and healing my wounds.", "Bard", msg.sender);
-        createPrayer("Birth", "Give us a quiverfull of children and subdue the earth with","your power o great warrior Father", "Bard", msg.sender);
-        createPrayer("Wealth", "God make Gilead Great Again and Again","to subdue the earth", "Bard", msg.sender);
+        createPrayer(unicode"Health 🏥", "Lord master, I ask that you fulfil your promise to me by", "restoring me to health and healing my wounds.", "Amen", "Bard Ionson", msg.sender);
+        createPrayer(unicode"Birth 👶", "Give us a quiverfull of children and subdue the earth with","your power o great warrior Father", "Amen", "Bard Ionson", msg.sender);
+        createPrayer(unicode"Wealth 💸", "God make Gilead Great Again and Again","to subdue the earth", "Amen", "Bard Ionson", msg.sender);
     }
 
     modifier isAllowedToPray(address _address) {
@@ -101,14 +102,13 @@ contract Prayer is ERC721, ERC721URIStorage, ERC721Burnable, ERC721Royalty, Owna
         maxOrder = _newMaxOrder;
     }
   
-    function sonCreatePrayer(string memory _prayerType, string memory _prayer, string memory _prayer2, string memory _prayer3, address _author)
+    function sonCreatePrayer(string memory _prayerType, string memory _prayer, string memory _prayer2, string memory _prayer3, string memory _author_name, address _author)
         public isInitiated(msg.sender) {
             if (_author == address(0))
                 _author = msg.sender;
-            // limit to 58 char
-            require(sLen(_prayerType) <= 14, "Type 14 character limit");
-            require(sLen(_prayer) <= 58 && sLen(_prayer2) <= 58  && sLen(_prayer3) <= 58 , "Line 58 character limit.");
-            createPrayer(_prayerType, _prayer, _prayer2, _prayer3, _author);
+            require(sLen(_prayerType) <= 20, "Type 20 character limit");
+            require(sLen(_prayer) <= 62 && sLen(_prayer2) <= 62  && sLen(_prayer3) <= 62 , "Line 62 character limit.");
+            createPrayer(_prayerType, _prayer, _prayer2, _prayer3, _author_name, _author);
     }
 
     function sLen(string memory s) internal pure returns (uint length) {
@@ -134,11 +134,12 @@ contract Prayer is ERC721, ERC721URIStorage, ERC721Burnable, ERC721Royalty, Owna
         return length;
     }
 
-    function createPrayer(string memory _prayerType, string memory _prayer1, string memory _prayer2, string memory _prayer3, address _author) internal {
+    function createPrayer(string memory _prayerType, string memory _prayer1, string memory _prayer2, string memory _prayer3, string memory _author_name, address _author) internal {
         prayers[prayersLoaded].prayerType = _prayerType;
         prayers[prayersLoaded].text = _prayer1;
         prayers[prayersLoaded].text2 = _prayer2;
         prayers[prayersLoaded].text3 = _prayer3;
+        prayers[prayersLoaded].author_name = _author_name;
         prayers[prayersLoaded].sonOfJacob = payable(_author);
         prayersLoaded++;
     }
@@ -207,11 +208,12 @@ contract Prayer is ERC721, ERC721URIStorage, ERC721Burnable, ERC721Royalty, Owna
         string memory p1= onePrayer.text;
         string memory p2= onePrayer.text2;
         string memory p3= onePrayer.text3;
+        string memory author_name = onePrayer.author_name;
         string memory numReadings = Strings.toString(_numReadings);
-        string memory theFirstObj = appendString("<svg viewBox='0 0 150 100' xmlns='http://www.w3.org/2000/svg'><style> .small { font: italic 5px sans-serif; } .med { font: italic 4px sans-serif; } .red { font: italic 20px serif; fill: red; } </style> <rect height='100' width='150' y='0' x='0' fill='lightblue'> </rect><text x='5' y='18' class='red'>", t, "</text> <text x='5' y='40' class='small'>",p1,"</text><text x='5' y='48' class='small'>",p2,"</text><text x='5' y='56' class='small'>",p3,"</text>");
-        string memory theObj = string(abi.encodePacked(theFirstObj,"<text x='20' y='64' class='med'>",numReadings,"x</text></svg>"));
+        string memory theFirstObj = appendString("<svg viewBox='0 0 150 100' xmlns='http://www.w3.org/2000/svg'><style> .small { font: italic 5px sans-serif; fill: white } .med { font: 4px sans-serif; fill: white} .red { font: 20px serif; fill: #e66668; } </style> <rect height='100' width='150' y='0' x='0' fill='#596edd'> </rect><text x='5' y='24' class='red'>", t, "</text> <text x='5' y='40' class='small'>",p1,"</text><text x='5' y='48' class='small'>",p2,"</text><text x='5' y='56' class='small'>",p3,"</text>");
+        string memory theObj = string(abi.encodePacked(theFirstObj,"<text x='20' y='64' class='med'>",numReadings,unicode"x</text><rect height='5' width='20' x='0' y='76' fill='#e66668'><animate attributeName='width' begin='0s' dur='18s' fill='freeze' from='0' to='150' /></rect><text x='65' y='80' class='med'>★★★★★</text></svg>"));
         string memory imageURI = svgToImageURI(theObj);
-        string memory uri = formatTokenURI(imageURI, t, p3, string(abi.encodePacked(p1, " ", p2, " ", p3)), numReadings);
+        string memory uri = formatTokenURI(imageURI, t, author_name, string(abi.encodePacked(p1, " ", p2, " ", p3)), numReadings);
 
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
