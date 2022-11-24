@@ -28,7 +28,7 @@ function addWalletListener() {
     window.ethereum.on("accountsChanged", (accounts) => {
       if (accounts.length > 0) {
         setWallet(accounts[0])
-        setStatus("👆Select a number of times a single prayer will be read out loud by a Soul Scroll minimum of 5 prayers max 10")
+        setStatus("👆Select a number of times a single prayer will be read out loud by a Soul Scroll minimum of 5 prayers max 20")
       } else {
         setWallet("")
         setStatus("🦊 Connect to MetaMask using the top right button.")
@@ -111,9 +111,9 @@ function addWalletListener() {
         Pick the number of times to have the generated prayer read minimum of 5, cost is 0.01 Ethereum per reading but only one NFT per request, then press "Pray for Me."
       </p>
       <form>
-        <p>✍️ Number of times prayer is read by Soul Scroll machines (min 5 | max 10): </p>
+        <p>✍️ Number of times prayer is read by Soul Scroll machines (min 5 | max 20): </p>
         <NumericInput
-          min={5} max={10}
+          min={5} max={20}
           onChange={(valueAsNumber) => setNumPrayerReadings(valueAsNumber)}
           onLoad={(valueAsNumber) => setNumPrayerReadings(valueAsNumber)}
         />
