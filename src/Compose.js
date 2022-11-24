@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import NumericInput from 'react-numeric-input';
 import { connectWallet, getCurrentWalletConnected, orderPrayer, payInitiation, sonCreatePrayer } from "./utils/interact.js";
-const Minter = (props) => {
+const Compose = (props) => {
 
   //State variables
   const [walletAddress, setWallet] = useState("");
@@ -89,23 +89,6 @@ function addWalletListener() {
       <br></br>
       <h1 id="title">Soul Scroll (aka Holy Roller)</h1>
       <h3>Soul Scroll, you might have called it a Holy Roller, is designed to act as a proxy for women to pray approved prayers of the Republic of Gilead out loud</h3>
-      <p>
-        Pick the number of times to have the generated prayer read, cost is 0.001 Eth per reading but only one NFT per request, then press "Pray for Me."
-      </p>
-      <form>
-        <h2>✍️ Number of times prayer is read by Soul Scroll machines: </h2>
-        <NumericInput
-          min={0} max={77}
-          onChange={(valueAsNumber) => setNumPrayerReadings(valueAsNumber)}
-        />
-      </form>
-	<p>{(numPrayerReadings==0?.001:numPrayerReadings*.001).toFixed(3)}</p>
-      <button id="mintButton" onClick={onMintPressed}>
-        Pray for Me
-      </button>
-      <p id="status">
-        {status}
-      </p>
 <center>*************************************************</center>
       <p>Only pay initiation dues if you have been elected as a Commander. Please contact @soulscroll1 on Twitter</p>
       <button id="initButton" onClick={onInitPressed}>
@@ -153,4 +136,4 @@ function addWalletListener() {
   );
 };
 
-export default Minter;
+export default Compose;

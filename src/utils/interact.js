@@ -47,7 +47,7 @@ export const connectWallet = async () => {
 
 export const orderPrayer = async (numPrayerReadings) => {
    window.contract = await new web3.eth.Contract(contractABI, contractAddress)
-   const payment = numPrayerReadings==0?1:numPrayerReadings
+   const payment = numPrayerReadings===0?1:numPrayerReadings
    //set up your Ethereum transaction 38D7EA4C68000
    const transactionParameters = {
      to: contractAddress, // Required except during contract publications.
@@ -125,6 +125,16 @@ export const sonCreatePrayer = async (prayerType, prayer, prayer2, prayer3) => {
  }
 }
 
+export const verifyIntitiation = async () => {
+   window.contract = await new web3.eth.Contract(contractABI, contractAddress)
+   const transactionParameters = {
+      allowedAddress: window.ethereum.selectedAddress,
+      data: window.contract.methods
+        .verifyInitiation(window.ethereum.selectedAddress)
+        .encodeABI(),
+   }
+}
+
 export const payInitiation = async () => {
    window.contract = await new web3.eth.Contract(contractABI, contractAddress)
    //set up your Ethereum transaction 38D7EA4C68000
@@ -136,7 +146,7 @@ export const payInitiation = async () => {
        .payInitiation(window.ethereum.selectedAddress)
        .encodeABI(), //make call to NFT smart contract
    }
-   
+
    //sign the transaction via MetaMask
    try {
      const txHash = await window.ethereum.request({
@@ -146,7 +156,7 @@ export const payInitiation = async () => {
    return {
      success: true,
      status:
-      "✅ Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/" +
+      "✅ Check out your transaction on Etherscan: https://etherscan.io/tx/" +
       txHash,
     }
   } catch (error) {
